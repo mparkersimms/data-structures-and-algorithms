@@ -86,7 +86,7 @@ const isCapitalized = (str) => {
   // Solution code here...
   const newStringArr = str.match(/[A-Z]\w+/gm);
   if (newStringArr){
-    return newStringArr
+    return newStringArr;
   }else{
     return [];
   }
@@ -154,6 +154,8 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 
 const noPunctuation = str => {
   // Solution code here...
+  const stringAnswer = str.match(/\w+\s/gm);
+  return stringAnswer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -170,6 +172,9 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 
 let hangman = (str) => {
   // Solution code here...
+  let re = /[aeiouAEIOU]/gm;
+  let newString = str.replace(re, '_');
+  return newString;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -185,8 +190,11 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  // Solution code here...
+
+  const stringAnswer = str.match(/\w+ells/gm);
+  return stringAnswer;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -289,7 +297,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -303,7 +311,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
@@ -316,7 +324,7 @@ xdescribe('Testing challenge 9', () => {
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should return an array of instances of "sells", shells", and "seashells"', () => {
     expect(findShells(seashells)).toStrictEqual(['sells', 'seashells', 'shells', 'sells', 'seashells', 'sells', 'shells', 'sells', 'shells']);
     expect(findShells(seashells).length).toStrictEqual(9);
