@@ -328,6 +328,16 @@ const meetings = [
 
 const sortMeetingsByDay = (arr) => {
   // Solution code here...
+  arr.sort((a,b) =>{
+    if (a.dayOfWeek > b.dayOfWeek){
+      return 1;
+    }else if (a.dayOfWeek < b.dayOfWeek){
+      return -1;
+    }else {
+      return 0;
+    }
+  });
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
