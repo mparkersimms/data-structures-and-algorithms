@@ -144,17 +144,24 @@ const gruffaloCrumble = {
 };
 
 
+// const listFoods = (recipe) => {
+
+// recipe.ingredients.forEach(value => {
+//   var match = value.match(/^[0-9]+\b\s\w+\S+\s/);
+//   var match2 = value.replace(match,'');
+//   results.push(match2);
+// });
+// return results;
+// };
 const listFoods = (recipe) => {
   var results = [];
   recipe.ingredients.forEach(value => {
-    var match = value.match(/^[0-9]+\b\s\w+\S+\s/);
-    var match2 = value.replace(match,'');
-    results.push(match2);
+    var one = value.indexOf(' ');  
+    var two = value.indexOf(' ', one +1);
+    results.push(value.slice(two + 1));
   });
   return results;
 };
-
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
 
