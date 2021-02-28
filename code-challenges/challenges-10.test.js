@@ -21,10 +21,14 @@ For example:
 
 Returns: ['dyoll', 'eimaj'];
 ------------------------------------------------------------------------------------------------ */
-
 const getNames = (arr) => {
   // Solution code here...
   const newArr = [];
+  arr.map(value => {
+    newArr.push(value.name.split('').reverse().join(''));
+  });
+
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -39,6 +43,15 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+  var answer = 0;
+  input.map((value) => {
+    value.map(val => {
+      if (val === target) {
+        answer++;
+      }
+    });
+  });
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -53,6 +66,14 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+  const answer = input.reduce((acc, val) => {
+    acc += val.reduce((a, v) => {
+      a += v;
+      return a;
+    }, 0);
+    return acc;
+  }, 0);
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -66,9 +87,28 @@ This function should then raise 2 to the power of the resulting numbers, returni
 
 For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
-
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  const answer = input.reduce((acc, val) => {
+    const nest = val.reduce((a, v) => {
+      if (typeof (v) === 'number') {
+        if (v % 5 === 0) {
+          // console.log(v)
+          a.push(Math.pow(2, v));
+          // console.log((Math.pow(2,v)))
+        }
+        // console.log(a)
+        return a;
+      } else {
+        return [];
+      }
+    }, []);
+
+    console.log(nest);
+    acc.push(nest);
+    return acc;
+  }, []);
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -135,6 +175,13 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  const answer = data.reduce((acc, value) => {
+    if (value.gender === 'male' || value.gender === 'female') {
+      acc.push(value.name);
+    }
+    return acc;
+  }, []).join(' and ');
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -145,6 +192,16 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  var ans;
+  data.reduce((acc, val) => {
+    const num = parseInt(val.height);
+    if (num < acc || acc === 0) {
+      acc = num;
+      ans = val.name;
+    }
+    return acc;
+  }, 0);
+  return ans;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -160,7 +217,7 @@ Run your tests from the console: jest challenges-10.test.js
 
 describe('Testing challenge 1', () => {
   test('It returns an array of names reversed', () => {
-    expect(getNames([{name:'lloyd', age: 32, shoeSize: 12}, {name:'jamie', age:21, shoeSize: 8}])).toStrictEqual(['dyoll', 'eimaj']);
+    expect(getNames([{ name: 'lloyd', age: 32, shoeSize: 12 }, { name: 'jamie', age: 21, shoeSize: 8 }])).toStrictEqual(['dyoll', 'eimaj']);
     expect(getNames([])).toStrictEqual([]);
   });
 });
