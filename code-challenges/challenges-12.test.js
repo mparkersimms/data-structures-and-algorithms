@@ -102,9 +102,69 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
+// const grandTotal = (stores) => {
+//   // Solution code here...
+//   var answer = [];
+//   var answer1 = 0;
+//   var answer2 = 0;
+//   var answer3 = 0;
+//   var answer4 = 0;
+//   var answer5 = 0;
+//   var answer6 = 0;
+//   var answer7 = 0;
+//   var answer8 = 0;
+//   var answer9 = 0;
+//   var answer10 = 0;
+//   var answer11 = 0;
+//   var answer12 = 0;
+
+//   for (var i = 0; i < stores.length; i++) {
+
+//     answer1 += stores[i][0];
+//     answer2 += stores[i][1];
+//     answer3 += stores[i][2];
+//     answer4 += stores[i][3];
+//     answer5 += stores[i][4];
+//     answer6 += stores[i][5];
+//     answer7 += stores[i][6];
+//     answer8 += stores[i][7];
+//     answer9 += stores[i][8];
+//     answer10 += stores[i][9];
+//     answer11 += stores[i][10];
+//     answer12 += stores[i][11];
+//   }
+//   answer.push(answer1);
+//   answer.push(answer2);
+//   answer.push(answer3);
+//   answer.push(answer4);
+//   answer.push(answer5);
+//   answer.push(answer6);
+//   answer.push(answer7);
+//   answer.push(answer8);
+//   answer.push(answer9);
+//   answer.push(answer10);
+//   answer.push(answer11);
+//   answer.push(answer12);
+//   console.log(answer);
+//   return answer;
+// };
+
 const grandTotal = (stores) => {
   // Solution code here...
+  var answer = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+
+
+  for (var i = 0; i < stores.length; i++) {
+    stores[i].forEach((value, index) => {
+      // console.log(value);
+      // console.log(index);
+      answer[index] += value;
+    });
+  }
+
+  // console.log(answer);
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -119,6 +179,13 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 
 const salesData = (hours, data) => {
   // Solution code here...
+  let answer = [];
+  hours.forEach((value, index) => {
+    // 
+    answer.push({ sales: `${data[index]} cookies`, time: `${value}` })
+    // console.log(data);
+  })
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -144,6 +211,17 @@ const errands = [
 
 const howManyTreats = (arr) => {
   // Solution code here...
+  let answer = 0;
+  arr.forEach((value, index) => {
+    value.items.forEach((v, i) => {
+      if (v.name === 'Treats') {
+        answer += v.quantity;
+
+        return answer;
+      }
+    });
+  });
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -270,13 +348,13 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should add the hourly totals array', () => {
     expect(grandTotal(cookieStores)).toStrictEqual([88, 153, 252, 286, 139, 161, 145, 232, 276, 207, 161, 169]);
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should create an object of data for each store', () => {
     expect(salesData(hoursOpen, grandTotal(cookieStores))).toStrictEqual([
       { sales: '88 cookies', time: '9 a.m.' },
@@ -297,7 +375,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return the number 24', () => {
     expect(howManyTreats(errands)).toStrictEqual(24);
   });
